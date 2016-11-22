@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<!-- 引入spring-config.xml分流配置文件 -->
+	<import resource="classpath*:spring-config.xml"/>
+
+	<!-- 导入ORM mybatis配置文件 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactorysBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocations">
+			<list>
+				<value>classpath:mybatis-base.xml</value>
+				<value>classpath:mybatis-config.xml</value>
+			</list>
+		</property>
+		<property name="mapperLocations" value="classpath*:com/zy/web/*/mapper/xml/*.xml" />
+	</bean>
+	<!--Mybatis MapperScannerConfigurer 自动扫描 将Mapper接口生成代理Bean注入到Spring -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"><!--   -->
+		<property name="basePackage" value="com.zy.web.*.mapper" />
+	</bean>
+
+	<!-- 自动组件扫描 只扫面service包下面的service注解并注入Bean context:include-filter 过滤标签-->
+	<context:component-scan base-package="com.zy.web.*.service">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+	</context:component-scan>
+	
+	<!-- <bean name="InfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.zy.web.ism.mapper.InfoMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean> -->
+	
+    <!-- 注解驱动的事务管理器 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- 利用AnnotationMethodHandlerAdapter对Spring的Controller注入session对象  -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
+		<property name = "messageConverters">  
+			<list>
+				<bean class = "org.springframework.http.converter.StringHttpMessageConverter">
+					<property name = "supportedMediaTypes"><list><value>text/plain;charset=UTF-8</value></list></property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+
+
+
+	<!-- <context:component-scan base-package="com.*"></context:component-scan>
+    
+    <mvc:annotation-driven/> -->
+
+	<!--  <bean id="propertyConfigurer"
+    class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    	<property name="fileEncoding" value="utf-8" />
+    	<property name="locations">
+    	 <list>
+    	  <value>mailsender.properties</value>
+    	 </list>
+    	</property>
+    </bean> -->
+    
+    <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+     <property name="host">
+      <value>smtp.163.com</value>
+     </property>
+     <property name="javaMailProperties">
+            <props>
+              <prop key="mail.smtp.auth">true</prop>
+              <prop key="mail.smtp.timeout">250000</prop>
+            </props>
+        </property>	
+     <property name="username">
+      <value>Anteoy@163.com</value>
+     </property>
+     <property name="password">
+      <value>zswf250</value>
+     </property>
+    </bean>
+</beans>

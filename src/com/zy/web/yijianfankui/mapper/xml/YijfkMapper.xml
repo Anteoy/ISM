@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zy.web.yijianfankui.mapper.YijfkMapper" >	
+	<!-- 查询所有用户反馈意见 -->
+	<select id="chaxyjfklist" resultType="com.zy.web.yijianfankui.entity.Yijfk">
+		select * from (select * from t_yjfk order by send_time desc limit 16 offset 0 )  A order by send_time 
+	</select>
+	<!-- 反馈意见上传 -->
+	<insert id="chaxrfkxx">
+		insert into t_yjfk values (NOW(),#{content})
+	</insert>
+
+</mapper>

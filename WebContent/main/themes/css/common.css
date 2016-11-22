@@ -1,0 +1,116 @@
+a{color:#000000}
+a:hover{color:#ff3333}
+
+* {
+	font-size: 12px;
+}
+
+body {
+	padding: 0px;
+	margin: 0px;
+}
+ul,dl,form{
+	margin: 0px;padding: 0px;
+}
+ul li{
+	 list-style:none;
+}
+
+.table {
+	border: #EFEFEF 1px solid;
+	border-spacing: 0px;
+	border-collapse: 0px;
+}
+
+.table tr{
+	  height:30px
+}
+
+.searchtext {
+	width: 18%;
+	background-color:#F8F8F8;
+	text-align: right;
+}
+
+.searchcontext {
+	padding-left:5px;
+}
+
+.tool-bar,.common_Search{
+	height: 26px;
+	background: #EFEFEF;
+	border-bottom: 1px #CCCCCC solid;
+	padding:2px 5px 2px 5px
+}
+ 
+.pager {
+	background: #EFEFEF;
+	border-top: 1px #CCCCCC solid;
+	border-bottom: 1px #CCCCCC solid;
+}
+
+.context {
+	overflow: auto;
+	width: 100%;
+}
+.padleft5px {
+	padding-left:5px;
+}
+.searchform{
+	margin:0px;
+}
+ 
+
+.call_img{
+	cursor:pointer
+}
+.call_ul{
+
+}
+	
+.call_ul li{
+ 	float:left;width:80px; line-height:26px;
+}
+.dataGrid{
+	overflow: auto;
+}
+.DataGridTable {
+	width: auto;
+	max-width: 100%;
+	height: auto;
+	font-size: 12px;
+	border-collapse: collapse;
+	border: 1px #CCCCCC solid;
+	border-top-style: none;
+}
+.DataGridTable .grid-cell {
+	 border: 1px  dotted #CCCCCC;
+}
+.DataGridTable thead tr {
+}
+.DataGridTable thead tr th {
+	font-size: 12px;
+	line-height: 26px;
+	font-weight: normal;
+}
+.DataGridTable .GridList {  
+    height: 500px; 
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+.DataGridTable .GridList tr {
+	height: 26px;
+}
+.DataGridTable .GridList tr td {
+	height: 26px;
+	border-right:1px dotted #ccc;
+	font-size:12px;
+	font-weight:normal;
+	background:#fafafa url('default/images/datagrid_header_bg.gif') repeat-x left bottom;
+	border-bottom:1px dotted #ccc;
+	border-top:1px dotted #fff;
+}
+
+.pointer{
+	cursor:pointer;
+}

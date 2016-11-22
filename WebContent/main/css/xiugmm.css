@@ -1,0 +1,152 @@
+/* 修改密码其余标签框 */
+ol, ul, menu {
+	list-style:none
+}
+
+/* input 修改用户名框*/
+.ipt {
+	border: solid 1px #d2d2d2;
+	border-left-color: #ccc;
+	border-top-color: #ccc;
+	border-radius: 2px;
+	box-shadow: inset 0 1px 0 #f8f8f8;
+	background-color: #fff;
+	padding: 4px 6px;
+	height: 21px;
+	line-height: 21px;
+	color: #555;
+	width: 180px;
+	vertical-align: baseline;
+}
+
+/* btn 主页全局按钮样式*/
+.btn {
+	position: relative;
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 12px;
+	font-weight: bold;
+	height: 27px;
+	line-height: 27px;
+	min-width: 52px;
+	padding: 0 12px;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 2px;
+	border: 1px solid #ddd;
+	color: #666;
+	background-color: #f5f5f5;
+	background: -webkit-linear-gradient(top, #F5F5F5, #F1F1F1);
+	background: -moz-linear-gradient(top, #F5F5F5, #F1F1F1);
+	background: linear-gradient(top, #F5F5F5, #F1F1F1);
+}
+/*btn样式（蓝色）*/
+.btn-primaryaaa {
+	border-color: #3079ED;
+	color: #F3F7FC;
+	background-color: #4D90FE;
+	background: -webkit-linear-gradient(top, #4D90FE, #4787ED);
+	background: -moz-linear-gradient(top, #4D90FE, #4787ED);
+	background: linear-gradient(top, #4D90FE, #4787ED);
+}
+.btn-primaryaaa:hover {
+	border-color:#2F5BB7;
+	color:#fff;
+	background-color: #4D90FE;
+	background: -webkit-linear-gradient(top, #4D90FE, #357AE8);
+	background: -moz-linear-gradient(top, #4D90FE, #357AE8);
+	background: linear-gradient(top, #4D90FE, #357AE8);
+}
+.btn-primaryaaa:active, .btn-primaryaaa.btn-active {
+	box-shadow:#2176D3 0 1px 2px 0 inset;
+	border-color: #3079ED;
+}
+.btn-primaryaaa:focus {
+	border-color:#4d90fe;
+	outline:none
+}
+
+.theme-popover-mask {
+	z-index: 9998;/*设置元素的堆叠顺序*/
+	position:fixed;/* 生成绝对定位的元素，相对于浏览器窗口进行定位。 */
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:#000;
+	opacity:0.4;/* 规定不透明度。从 0.0 （完全透明）到 1.0（完全不透明）。 */
+	filter:alpha(opacity=40);/* Filters主要是运用在图片上，以实现一些特效。 */
+	display:none/* 此元素不会被显示。 */
+}
+/*修改密码主要div*/
+.theme-popover {
+	z-index:9999;/*设置元素的堆叠顺序*/
+	position:fixed;/* 生成绝对定位的元素，相对于浏览器窗口进行定位。 */
+	top:50%;/* 元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定。 */
+	left:50%;
+	width:660px;
+	height:360px;
+	margin:-180px 0 0 -330px;
+	border-radius:5px;/* border-radius 属性是一个简写属性，用于设置四个 border-*-radius 属性。 */
+	border:solid 2px #666;
+	background-color:#fff;
+	display:none;/* 此元素不会被显示。 */
+	box-shadow: 0 0 10px #666;/* box-shadow和text-shadow一样可以使用一个或多个投影，如果使用多个投影时必须需要用逗号“，”分开。 */
+}
+
+.theme-popbod {
+	padding:60px 15px;
+	color:#444;
+	height: 148px;
+}
+.theme-popbom {
+	padding:15px;
+	background-color:#f6f6f6;
+	border-top:1px solid #ddd;
+	border-radius:0 0 5px 5px;
+	color:#666
+}
+.theme-popbom a {
+	margin-left:8px
+}
+.theme-poptit .close {
+	float:right;
+	color:#999;
+	padding:5px;
+	margin:-2px -5px -5px;
+	font:bold 14px/14px simsun;
+	text-shadow:0 1px 0 #ddd
+}
+.theme-poptit .close:hover {
+	color:#444;
+}
+.btn.theme-reg {
+	position: absolute;
+	top: 8px;
+	left: 43%;
+	display: none
+}
+
+.theme-signin {
+	margin: -50px -20px -50px 90px;
+	text-align:left;
+	font-size: 14px;
+}
+.theme-signin h4 {
+	color:#999;
+	font-weight:100;
+	margin-bottom: 20px;
+	font-size: 12px;
+}
+.theme-signin li {
+	padding-left: 80px;
+	margin-bottom: 15px;
+}
+.theme-signin li strong {
+	float: left;
+	margin-left: -80px;
+	width: 80px;
+	text-align: right;
+	line-height: 32px;
+}

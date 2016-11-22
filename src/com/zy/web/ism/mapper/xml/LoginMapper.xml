@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.zy.web.ism.mapper.LoginMapper">
+
+	<select id="hqyh" resultType="com.zy.web.ism.entity.Employee">
+		select * from t_yongh
+		<trim prefix="where" prefixOverrides="and">
+			<if test="yonghm != null">
+				and yonghm=#{yonghm}
+			</if>
+			<if test="mim != null">
+				and mim=#{mim}
+			</if>
+		</trim>
+	</select>
+
+	<update id="xgmm">
+		update t_yongh set mim=#{mim} where bh=#{bh}
+	</update>
+
+	<update id="zhux">
+		update t_yongh set zxzt = 0 where bh = #{bh}
+	</update>
+
+	<update id="zaix">
+		update t_yongh set zxzt = 1 where bh = #{bh}
+	</update>
+	
+	<update id="xiugmm">
+		update t_yongh set mim = #{mim_new} where bh = #{bh}
+	</update>
+	<select id="chaxyhxx" resultType="com.zy.web.ism.entity.Employee">
+		select * from t_yongh where bh = #{bh}
+	</select>
+</mapper>

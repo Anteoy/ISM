@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<script type="text/javascript" src="js/interComUrl.js"></script>
+	<script type="text/javascript" src="jquery/jquery.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+	var zh = "zh"; // TODO 从父页面获取  chat_userinfo_username;
+	var mm = "123"; // TODO 从父页面获取 chat_userinfo_sessionid;
+
+	if (zh && mm) {
+
+		parent.chat_interface_login();
+		/* ajax登录交换数据 */
+		$.ajax({
+			url: "login.do",
+			type: "post",
+			data: {
+				zh: zh,
+				mm: mm
+			},
+			dataType: "JSON",
+			success: function(response) {
+				if (response.success == 1) {
+					var sessionid = response.sessionid;
+					var zhbh = response.zhbh;
+					var param = { "sessionid":sessionid }
+					$.ajax({
+						url:loginUrl,
+						type: "post",
+						data: param,
+						dataType: "json",
+						success: function(response) {
+							if(response.success == 1) {
+								window.location.href = "zaix.html?sessionid="+sessionid+"&zhbh="+zhbh;
+							}else{
+								parent.chat_interface_login_failed();
+								alert("登陆失败！！请重新登陆 ");
+							}
+						}
+					});
+				} else {
+					$("#login_error").show();
+					$("#loading_div").hide();
+				}
+			},
+			error: function() {
+				$("#server_error").show();
+				$("#loading_div").hide();
+			}
+		});
+	}
+</script>
+</body>
+</html>

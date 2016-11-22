@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.zy.web.shebgg.mapper.ShebglMapper">
+<!-- 获取设备列表 -->
+<select id="huoqusbll" resultType="com.zy.web.shebgg.entity.Sheb">
+	select * from t_sheb
+</select>
+
+<!-- 增加设备 -->
+<insert id="zenjsb">
+	insert into t_sheb (mic,shiysc,shebgly,gourjg,goumsj) values (#{mic},#{shiysc},#{shebgly},#{gourjg},#{goumsj})
+</insert>	
+<!-- 删除设备 -->
+<delete id="shancsb">
+	delete from t_sheb where bh = #{bh}
+</delete>
+
+<!-- 更新设备参数 -->
+<update id="genxsheb">
+	update t_sheb set mic=#{mic},shiysc=#{shiysc},shebgly=#{shebgly},gourjg=#{gourjg},goumsj=#{goumsj} where bh = #{bh}
+</update>
+</mapper>

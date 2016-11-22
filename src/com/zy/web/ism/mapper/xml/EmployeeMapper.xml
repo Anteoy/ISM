@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.zy.web.ism.mapper.EmployeeMapper">
+	<select id="selectAll" resultType="com.zy.web.ism.entity.Employee">
+		select * from t_yongh 
+	</select>
+	
+	<select id="findById" parameterType="String" resultType="com.zy.web.ism.entity.Employee">
+		select * from t_yongh where id=#{id}
+	</select>
+	
+	<select id="findByUserName" parameterType="String" resultType="com.zy.web.ism.entity.Employee">
+		select * from t_yongh where xm=#{xm}
+	</select>
+	
+	<insert id="insert" parameterType="String" >
+		insert into t_yongh(xm,xb,sjh,bm,zc,xz,yonghm,mim,touxbh,qx,lxyx,jj) VALUES(#{xm},#{xb},#{sjh},#{bm},#{zc},#{xz},#{yonghm},#{mim},#{touxbh},#{qx},#{lxyx},#{jj})
+	</insert>
+	
+	
+	<update id="update" parameterType="String"  >
+	update  t_yongh  set xm=#{xm},xb=#{xb},sjh=#{sjh},bm=#{bm},zc=#{zc},xz=#{xz}, yonghm= #{yonghm},mim = #{mim}, touxbh= #{touxbh}, qx = #{qx},lxyx = #{lxyx},jj = #{jj}  where bh=#{bh}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		delete from t_yongh where bh=#{bh}
+	</delete>
+	
+	<select id="selectglxx" resultType="com.zy.web.ism.entity.Employee">
+		select * from t_yongh where qx = 2 or qx = 3 order by qx desc limit 4 offset 0
+	</select>
+
+	<select id="hqsyyx" resultType="String">
+		select lxyx from t_yongh 
+	</select>
+</mapper>

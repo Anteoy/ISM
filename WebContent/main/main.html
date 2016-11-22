@@ -1,0 +1,403 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<link href="ui/themes/base/jquery.ui.core.min.css" rel="stylesheet" type="text/css" >
+<link href="ui/themes/base/jquery.ui.datepicker.min.css" rel="stylesheet" type="text/css" >
+<link href="ui/themes/base/jquery.ui.theme.min.css" rel="stylesheet" type="text/css" >
+
+<link href="easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+<link href="easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+<!-- <link href="themes/css/common.css" rel="stylesheet" type="text/css" />
+<link href="themes/gray/simplegrid.css" rel="stylesheet" type="text/css" />
+<link href="themes/gray/tab.css" rel="stylesheet" type="text/css" /> -->
+
+<script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="js/jquery.easyui.min.js" type="text/javascript"></script>
+<script src="js/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
+<script src="js/jquery.tmpl.min.js" type="text/javascript"></script>
+<script src="js/plugins/jquery.simplegrid.js?v=014" type="text/javascript"></script>
+<script src="js/plugins/jquery.tab.js" type="text/javascript"></script>
+<script src="js/prototype.js" type="text/javascript"></script>
+
+<script src="ui/jquery.ui.core.min.js"></script>
+<script src="ui/jquery.ui.widget.min.js"></script>
+<script src="ui/jquery.ui.datepicker.min.js"></script>
+<script src="ui/i18n/jquery.ui.datepicker-zh-CN.min.js"></script>
+<script src="ui/jquery.loader.js"></script>
+
+<script src="index.js" type="text/javascript"></script>
+
+<link href="css/chat.css" rel="stylesheet" type="text/css" >
+<script src="js/chat.js" type="text/javascript"></script>
+<script type="text/javascript" src="../js2/framework.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="easyui/demo/demo.css">
+<!-- 修改密码 -->
+<link href="css/xiugmm.css"  type="text/css" rel="stylesheet" media="all"/>
+<script>
+var ZHBH = $$.GetUrlParam("ZHBH");
+var DLXM = $$.GetUrlParam("DLXM");
+var zc = $$.GetUrlParam("zc");
+var zuihzxsj = $$.GetUrlParam("zuihzxsj");
+var touxbh = $$.GetUrlParam("touxbh");
+</script>
+
+<style>
+	.list {
+			 margin-left:3px;
+
+		}
+
+	.lingdaoXx {
+		height: 80% ;
+		padding: 10px;
+		width: 20%;
+	}
+
+
+	.lingdaoXx .img_head {
+		padding-right: 5px;
+		float: left;
+		height: 80px;
+		width: 80px;
+	}
+
+	.lingdaoXx .img_newmsg {
+		padding-left: 5px;
+		float: right;
+		height: 12px;
+		width: 12px;
+		border: 0px;
+	}
+
+
+
+
+
+			.title {
+				margin: 15px 0;
+				text-align:center;
+			}
+
+	</style>
+
+
+<script type="text/javascript">
+
+
+
+</script>
+
+</head>
+<body class="easyui-layout" >
+	<div id="index_west" region="west" onCollapse="window.onresize();" onExpand="window.onresize();" style="width:260px;height:100%" title="用户信息" >
+		<div class="easyui-layout" style="margin: 0px; padding: 0px;width: 100%;height: 100%;">
+			<div id="denglxx" region="north" split="true" style="width: 100%; height: 160px;">
+				<div style="margin:10px;height: 22%;">
+					<div id="dlyh" style="margin:10px">登陆用户： </div>
+					<div id="yhjs" style="margin:10px">用户角色: </div>
+					<div id = "zhzxsj" style="margin:10px">最后在线时间: </div>
+					<a id="xiugmm" class="btn btn-primaryaaa btn-large theme-login" href="javascript:;" style="margin-top: -3px;">修改密码: </a><br />
+					<a href="zhux.html" class="btn btn-primaryaaa btn-large theme-login" style=" margin-top:1px; padding:-2px ">注销</a><br />
+				</div>
+			</div>
+			<div id="yijfk" region="center"  title="匿名交流反馈专区" split="true" style="width: 100%;height: 330px;"> <!-- split有无横的间隔 这里无 -->
+			</div>
+			<div region="south"  split="true" style="width: 100%;height:60px">
+					<div style="width: 170px;float: left;padding-top: 4%;"><textarea id="sendbox" style=""></textarea></div>
+					<div style="padding-top: 4%;"><input id="sendbtn" type="button" style="/* width:100%; height:100%; */" value="发送"></div>
+			</div>
+		</div>
+	</div>
+
+	<div id="index_center" region="center" title="欢迎来到ISM企业服务与管理平台" style="width: 1658px;height:950px;overflow-x:scroll ;/*  overflow-y:hidden */">
+		<div style="width: 1650px;height:950px;">
+		<div id="zhongjian"  style="
+			height: 100%;
+			width: 1056px;
+			float: left;
+			border: 1px solid red ;">
+			<!-- 中间DIV -->
+			<div region="north" split="true" style="margin-left: 40px;width: 100%; height: 26%;"><div id = "renygx" style="width: 100%;"></div></div><!-- 人员关系 -->
+			<div  region="center"  title="" split="true" style="width: 100%;overflow-x:scroll ">
+				<div id = "gongg" class="easyui-tabs">
+					<div id = "xinwen" title="内外新闻" style="width:100%;height:100%;padding:20px"></div>
+					<div id = "xitgg" title="系统公告" style="width:100%;height:100%;padding:20px">
+						<div style="text-align:center;">系统公告</div>
+						<p id="ggnr" style="">公告内容：</p>
+						<div id="gonggsj" style="">公告时间：</div>
+					</div>
+				</div><!-- 公告 -->
+			</div>
+			<div id = "guanl" region="south"  split="true"  style="width: 100%;height:30%;overflow-x:scroll ">
+				<div id = "guanl_1" style="width:49%;height:100%;float:left;margin-top: 2%;">
+					<!-- 群聊div start -->
+					<div>
+						<a class="btn btn-primaryaaa btn-large theme-login" onclick="qunliaotiaozhuan()">单聊不尽兴，点这里试试群聊呗</a>
+					</div>
+					<div>
+						<a class="btn btn-primaryaaa btn-large theme-login" onclick="qingjsq()">企业请假条</a>
+					</div>
+					<div>
+						<a class="btn btn-primaryaaa btn-large theme-login" onclick="guanltz()">企业级内部员工管理(超级管理员)</a>
+					</div>
+					<div>
+						<a class="btn btn-primaryaaa btn-large theme-login" onclick="qingjspi()">企业请假审批管理(超级管理员)</a>
+					</div>
+				</div>
+				<div id = "guanl_2" style="width:50%;height:100%;float:left;margin-top: 2%;">
+					<div>
+						<a class="btn btn-primaryaaa btn-large " onclick="shebgl()">企业设备管理(超级管理员)</a>
+					</div>
+					<div>
+						<a class="btn btn-primaryaaa btn-large " onclick="gsjj()">编辑企业简介(超级管理员)</a>
+					</div>
+					<div>
+						<a class="btn btn-primaryaaa btn-large " onclick="wbxw_sc()">外部新闻服务(超级管理员)</a>
+					</div>
+					<div>
+						<a class="btn btn-primaryaaa btn-large " onclick="nbxw_sc()">内部新闻服务(超级管理员)</a>
+					</div>
+					<div>
+						<a class="btn btn-primaryaaa btn-large " onclick="khxx_tz()">我的客户信息</a>
+					</div>
+				</div>
+			</div><!-- 管理 -->
+		</div>
+
+
+		<div id="youce" style="
+			height: 100%;
+			width: 581px;
+			top: 0px;
+			 float: left;  border: 1px solid red;overflow-x:scroll;/* margin-left: auto;
+    margin-top: -935px; */ ">
+			<!-- 右侧DIV -->
+			<div id = "jianj" region="center"  title="测试标题" split="true" style="width: 581px;height:35%">
+				<div class="page">
+					<h2 id="title" class="title" id="zhut">公司测试标题</h2>
+					<div id="gsjj"></div>
+				</div>
+			</div><!-- 简介 -->
+			<div id = "tupq" style="width: 581px;height:41%;border: 1px solid red">
+				<!-- 修改此Iframe的src地址为外链地址-->
+				<div id="gongstp-box">
+					<iframe id="gongstp" border="0" frameborder="0" scrolling="no" height="100%" name="gongstp" width="100%" src="../gongstup/gongsfc-tp.html"></iframe>
+				</div>
+			</div><!-- 图片墙 -->
+		</div>
+		</div>
+	</div>
+
+
+
+	<div id="system-message" title="系统消息" style="padding: 10px;"></div>
+	<!-- 聊天框支持头 -->
+	<div id="chat-box-hander">
+		<img id="status" src="" width="20" height="20" style="margin-top: 4px;float: left;"/>
+		<span id="notice"></span>
+	</div>
+
+	<!-- 修改此Iframe的src地址为登陆地址, 登陆成功后应跳转到列表页面 -->
+	<div id="chat-box">
+		<iframe id="chatiframe" border="0" frameborder="0" scrolling="no" height="100%" name="chatiframe" width="100%" src="../zaix.html"></iframe>
+	</div>
+
+	<script id="tmpl_yijfk" type="text/x-jquery-tmpl">
+
+		<li class="m-list-group" style = 'padding:0px; line-height:45px;'>
+			<span style = 'font-size:13px; color:green'>匿名:</span>
+			<span id = "oldxm" style = 'font-size:11px;word-wrap: break-word'>{{= content}}</span>
+		</li>
+
+	</script>
+
+	<script id="lingdaoTemplate" type="text/x-jquery-tmpl">
+		<div id="${src}" class="lingdaoXx" style="float:left;margin:7px;border: 1px solid red;">
+			<img class="img_head" src="${touxurl}">
+			<b class="xm">${xm}</b><span class="zx"></span><br/>
+			<div class="zc">职位：${zc}</div>
+			<span class="lianxdh">联系方式：${sjh}</span><br/>
+			<span class="jj">简介：</span><br/>
+			<span>${jj}</span>
+		</div>
+	</script>
+
+	<script>
+		$(function(){
+			$.ajax({
+				url: "../huoqfkxx.do",
+				type: "post",
+				data: {},
+				dataType: "json",
+				success: function(response) {
+				if(response.success == null){
+					console.info("服务器返回的反馈信息为空 ");
+				}
+				if(response.success == -1){
+					console.info("未获取登陆权限  ");
+					quanxtz();
+					return;
+				}
+				$("#tmpl_yijfk").tmpl(response.data).appendTo("#yijfk");
+				zidgdtfk();
+				},
+				error: function() {}
+			});
+		});
+
+
+
+		function tijfkxx() {
+			var msg = $("#sendbox").val();
+
+			if(msg.length == 0)
+			{
+				console.info("message empty");
+				return;
+			}
+
+			var fasjson	=	{
+					"content": msg
+					}
+
+			$.ajax({
+				type: "post",
+				url: "../shangcfkxx.do",
+				/*data消息需按照规格重新封装*/
+				data: fasjson,
+				success: function(response) {
+					if(response.success == -1){
+						console.info("未获取登陆权限  ");
+						quanxtz();
+						return;
+					}
+					if (response.success = 0) {
+						console.info("error：消息发送失败！");
+						return;
+					}
+				//	var	time	=	new Date().Format("yyyy-MM-dd hh:mm:ss");
+				//	fasjson.send_time = time;
+					$("#tmpl_yijfk").tmpl(fasjson).appendTo("#yijfk");
+					zidgdtfk();
+
+				},
+				error: function(){
+					console.info("error:AJAX传输错误");
+				}
+			});
+			$("#sendbox").val("");
+			$("#sendbox").focus();
+
+
+		}
+
+
+		/*
+		 * 滚动条自动滚动
+		 *
+		 */
+		function zidgdt() {
+			console.log($("#yijfk").height());
+			$("#yijfk").scrollTop($("#yijfk").height() * 10);
+		};
+
+		$("#sendbox").keyup(function(e){
+			if(e.keyCode == 13) {
+				tijfkxx();
+				//e.preventDefault;
+			}
+		});
+		$("#sendbtn").click(function(e){
+			tijfkxx();
+			//e.preventDefault;
+		});
+	</script>
+
+	<script id="neibxwl_templ" type="text/x-jquery-tmpl">
+		<li class="m-list-group  btn-large theme-login" onclick="chuanctz('${ljdz}','${bh}')" style = 'height:45px; padding:0px; line-height:45px;cursor: pointer;'>
+			<span style = 'font-size:18px; color:green'>主题:</span>
+			<span id = "oldxm" style = 'font-size:18px'>{{= zhut}}</span>
+			<span style = 'font-size:18px; color:green'>时间:</span>
+			<span id = "oldxm" style = 'font-size:18px'>{{= scsj}}</span>
+		</li>
+	</script>
+
+	<!-- 用户修改密码 -->
+	<div class="theme-popover" ><!-- style="    position: absolute;z-index: 999;" 层级在这里不能使用，使用后会出现问题 -->
+	     <div class="theme-poptit">
+	          <a href="javascript:;" title="关闭" class="close">×</a>
+	          <h3>个人密码修改</h3>
+	     </div>
+	     <div class="theme-popbod dform">
+	           <form class="theme-signin" name="loginform" action="" method="post">
+	                <ol>
+	                     <li><h4>修改密码</h4></li>
+	                     <li><strong>用户名：</strong><div class="ipt" id="yonghm-xiug" type="text" name="log" value="" size="20" /></div></li>
+	                     <li><strong>当前密码：</strong><input class="ipt" id="mim_dangq" type="password"  name="pwd"  size="20" /></li>
+						 <li><strong>新密码：</strong><input class="ipt" id="mim_xin" type="password" name="pwd"  size="20" /></li>
+						 <li><strong>密码确认：</strong><input class="ipt" id="mim_xin_quer" type="password" name="pwd"  size="20" /></li>
+	                     <li><input class="btn-primaryaaa" type="submit" name="submit" value=" 修改密码 " onclick="xiugmm()" /></li>
+	                </ol>
+	           </form>
+	     </div>
+	</div>
+	<div class="theme-popover-mask"></div>
+	<!-- 修改密码js -->
+	<script>
+		jQuery(document).ready(function($) {
+			$('#xiugmm').click(function(){
+				$("#yonghm-xiug").append(DLXM);
+				$('.theme-popover-mask').fadeIn(100);  //使用淡入效果来显示一个隐藏的元素
+				$('.theme-popover').slideDown(200);//以滑动方式显示隐藏的元素
+			})
+			$('.theme-poptit .close').click(function(){
+				$('.theme-popover-mask').fadeOut(100);// 和上面显示对应
+				$('.theme-popover').slideUp(200);// 和上面显示对应
+			})
+		})
+
+		function xiugmm(){
+			var mim_dangq = $("#mim_dangq").val();
+			var mim_xin = $("#mim_xin").val();
+			var mim_xin_quer = $("#mim_xin_quer").val();
+			if (mim_xin != mim_xin_quer){
+				return;
+			}
+			var data = {
+				"ZHBH": ZHBH,
+				"mim_dangq": mim_dangq,
+				"mim_xin": mim_xin
+			};
+			$.ajax({
+				data: data,
+				url: "../xiugmm.do",
+				success: function(response) {
+					if(response.success == 1){
+						console.info("密码修改成功,将会跳转到登陆页面  ");
+						alert("密码修改成功,将会跳转到登陆页面,请用新密码重新登陆 ");
+						window.location.href="../index.html";
+					}else{
+						alert("密码修改失败,请检查后重新输入  ");
+					}
+				},
+				error: function() {console.info("系统数据传输错误  ");
+				alert("系统数据传输错误 ");}
+			});
+
+		}
+		/* window.onbeforeunload=function (){
+			if(event.clientX>document.body.clientWidth && event.clientY < 0 || event.altKey){
+			alert("你关闭了浏览器");
+			}else{
+			alert("你正在刷新页面");
+			}
+		} 阻塞错误 */
+
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+#chat-box-hander {
+	display: none;
+	position: absolute;
+	width: 150px;
+	height: 26px;
+	z-index: 999;
+	left: 0px;
+	top: 0px;
+	text-align: center;
+	line-height: 26px;
+	cursor: pointer;
+	-webkit-user-select:none; 
+	-moz-user-select:none; 
+	-ms-user-select:none; 
+	user-select:none;
+}
+
+#chat-box {
+	display: none;
+	position: absolute;
+	border: 1px solid;
+	width: 200px;
+	z-index: 999;
+	top: 27px;
+	box-shadow:1px 1px 10px #333;
+	-moz-box-shadow:1px 1px 10px #333;
+	-webkit-box-shadow:1px 1px 10px #333;
+}

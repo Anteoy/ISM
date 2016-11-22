@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Basic Layout - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="main/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="main/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="main/easyui/demo/demo.css">
+	<script type="text/javascript" src="main/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="main/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="standard/res/js/framework.js"></script>
+</head>
+<body class="easyui-layout">
+  
+	<div  title="企业新闻" data-options="region:'center',iconCls:'icon-ok'" style="height:100%;width:100%">
+		<div id="zhut" style="font-size: large;text-align: center;margin-top:1%"></div>
+		<div id="neir" style="text-align: center;margin-top:1%"></div>
+		<div id="sj" style="margin-top:3%;text-align:center"></div>
+	</div>
+ 
+ 	<script type="text/javascript">
+ 	var bh = $$.GetUrlParam("bh");
+	$(function(){
+		var data = {
+				"bh": bh
+		}
+		$.ajax({
+			data: data,
+			dataType: "json",
+			url: "hqxwjjxx.do",
+			success: function(response){
+				if(response.success == 1){
+					var xwxx = response.xwxx;
+					$("#zhut").text(xwxx.zhut);
+					$("#neir").text(xwxx.neir);
+					$("#sj").text(xwxx.scsj);
+				}else{
+				}
+			},
+			error: function(response){
+				
+			}
+		})
+	})
+	
+
+	
+
+	</script>
+</body>
+</html>

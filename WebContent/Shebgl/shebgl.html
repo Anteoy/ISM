@@ -1,0 +1,322 @@
+<!--
+  @filename index.html
+  @directory /WebContent/test/t_test_test
+  @description 待审核列表
+  @author 周严 
+  @date 2016-02-29 09:51:16
+  @version v0.1
+-->
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>设备管理平台</title>
+	<link rel="stylesheet" type="text/css" href="../standard/res/easyui/themes/metro-blue/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../standard/res/easyui/themes/mobile.css">
+	<link rel="stylesheet" type="text/css" href="../standard/res/easyui/themes/icon.css">
+	<!-- <script type="text/javascript" src="js/res/easyui/jquery.min.js"></script> -->
+	<script type="text/javascript" src="../standard/res/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.uploadify.js"></script>
+	<script type="text/javascript" src="../standard/res/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../standard/res/easyui/jquery.easyui.mobile.js"></script>
+	<script type="text/javascript" src="../standard/res/easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="../standard/res/js/jquery.tmpl.min.js"></script>
+	<script type="text/javascript" src="../standard/res/js/framework.js"></script>
+	
+	
+	
+	<!-- databox -->
+    <link rel="stylesheet" type="text/css" href="../standard/res/demo.css">
+</head>
+<body style =" width:100%;height:100%">
+    <div class="easyui-navpanel" style = "margin-bottom:100px">
+        <header>
+            <div class="m-toolbar">
+                <span class="m-title">设备管理服务平台</span>
+                <div class="m-right">
+                </div>
+            </div>
+        </header>
+        
+    </div>
+    
+    <div style="margin-top:50px;margin-bottom:100px" id="crud-body">
+    <h2>设备管理</h2>
+    <table id="dg" title=""  class="easyui-datagrid" style="width:100%;height:98%"
+            url="../huoqsbll.do"
+            toolbar="#toolbar" pagination="true"
+            rownumbers="true" fitColumns="true" singleSelect="true">
+        <thead>
+            <tr>
+                <th field="bh" width="50">编号</th>
+                <th field="mic" width="50" >设备名</th><!-- editor="{type:'validatebox',options:{required:true}}" 搜索以后会出现input 特别注意-->
+                <th field="shiysc" width="50">使用时长</th>
+                <th field="shebgly" width="50">设备管理员</th>
+                <th field="gourjg" width="50">购入价格</th>
+                <th field="goumsj" width="50">购买时间</th>
+            </tr>
+        </thead>
+    </table>
+    <div id="toolbar">
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">添加</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">更改</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">删除</a>
+    	<input id = "tt" class="easyui-textbox" onkeydown = "onkeyupTosearch()" data-options="buttonText:'搜索',buttonIcon:'icon-search',prompt:'请输入关键字'" onclick="sous()" style="width:450px;height:24px;">
+    </div>
+    <!-- 增加对话框 -->
+    <div id="dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"
+            closed="true" buttons="#dlg-buttons">
+        <div class="ftitle">新增用户信息</div>
+        <form id="fm" method="post" novalidate>
+            <div class="fitem">
+                <label>设备名　　　:</label>
+                <input name="mic" id = "mic" class="easyui-textbox" required="true">
+            </div>
+            <div class="fitem">
+                <label>设备管理员 ：</label>
+                <input name="shebgly" id = "shebgly" class="easyui-textbox" required="true">
+            </div>
+            <div class="fitem">
+                <label>购入价格　　:</label>
+                <input name="gourjg" id = "gourjg" class="easyui-textbox" required="true">
+            </div>
+            <div class="fitem">
+                <label>购买时间　　:</label>
+               <input class="easyui-datebox" id="goumsj"  data-options="formatter:myformatter,parser:myparser" ></input>
+            </div>
+        </form>
+    </div>
+    <div id="dlg-buttons">
+        <a href="javascript:void(0)" id="baoc" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser()" style="width:90px">保存</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
+    </div>
+   </div>
+
+<script type="text/javascript">
+/**
+ * 人员管理
+ */
+
+var url;
+function newUser(){
+    $('#dlg').dialog('open').dialog('center').dialog('setTitle','New User');
+    $('#fm').form('clear');
+   // url = 'insertemployee.do';
+}
+function editUser(){
+	$("#baoc").attr("onclick", "saveUser('edit')");
+    var row = $('#dg').datagrid('getSelected');
+    if (row){
+        $('#dlg').dialog('open').dialog('center').dialog('setTitle','Edit User');
+        $('#fm').form('load',row);
+      //  url = 'updateemployee.do?id='+row.id;
+    }
+}
+function saveUser(flag){
+	flag = ( flag == undefined )  ? true : false ;
+	if(flag == true){
+		var mic = $("#mic").val();
+		var shebgly = $("#shebgly").val();
+		var gourjg = $("#gourjg").val();
+		var goumsj = $('#goumsj').datebox('getValue');
+		var data={
+				"mic": mic,
+				"shebgly": shebgly,
+				"gourjg": gourjg,
+				"goumsj": goumsj,
+		};
+		
+		/* $.ajax({
+			url:,
+			type:"post",
+			data: data,
+			success: function(){
+				
+			},
+			error: function(){
+				
+			}
+		}); */
+		
+		$.ajax({
+			url: "../zenjsb.do",
+			type:"post",
+			data: data,
+			success: function(response){
+				if(response.success == -1){
+					$.messager.show({
+						title: 'Error',
+						msg: result.errorMsg
+					});
+					console.info("没有操作权限 ");
+				}
+				if(response.success == 0){
+					console.info("后台处理出错 ");
+				}
+				$('#dlg').dialog('close');
+				$('#dg').datagrid('reload');//新增完毕关闭对话框并重新加载
+			},
+			error: function(){
+				console.info(" ajax传输错误 ");
+			}
+		});
+		
+	}
+	if(flag == false){
+		var row = $('#dg').datagrid('getSelected');
+		var mic = $("#mic").val();
+		var shebgly = $("#shebgly").val();
+		var gourjg = $("#gourjg").val();
+		var goumsj = $('#goumsj').datebox('getValue');
+		var bh = row.bh;
+		var data={
+				"bh": bh,
+				"goumsj": goumsj,
+				"gourjg": gourjg,
+				"shebgly": shebgly,
+				"mic": mic,
+		};
+		$.ajax({
+			url:"../xiugsb.do",
+			type:"post",
+			data: data,
+			success: function(response){
+				if(response.success == -1){
+					$.messager.show({
+						title: 'Error',
+						msg: result.errorMsg
+					});
+					console.info("没有操作权限 ");
+				}
+				if(response.success == 0){
+					console.info("后台处理出错 ");
+				}
+				$('#dlg').dialog('close');
+				$('#dg').datagrid('reload');//新增完毕关闭对话框并重新加载
+			},
+			error: function(){
+				console.info(" ajax传输错误 ");
+			}
+		});
+	}
+}	
+function destroyUser(){
+    var row = $('#dg').datagrid('getSelected');
+    if (row){
+        $.messager.confirm('Confirm','Are you sure you want to destroy this user?',function(r){
+            if (r){
+            //	$.post(url,[data],[callback],[type])
+
+            	/* 说明：这个AJAX函数跟$.get()参数差不多，多了一个type参数，type为返回的数据类型，可以是html,xml,json等类型，如果我们设置这个参数为：json，那么返回的格式则是json格式的，如果没有设置，就 和$.get()返回的格式一样，都是字符串的。 */
+                $.post('../shancsb.do',{bh:row.bh},function(result){
+                    if (result.success){
+                        $('#dg').datagrid('reload');    // reload the user data
+                    } else {
+                        $.messager.show({    // show error message
+                            title: 'Error',
+                            msg: result.errorMsg
+                        });
+                    }
+                },'json');
+            }
+        });
+    }
+}
+	
+/**
+ *  管理员权限验证
+ */
+ quanx();
+function quanx(){
+	//$("#crud-body").empty();
+}
+
+var alldata = null;
+$(function(){
+	 $.ajax({
+			url: "../huoqsbll.do",
+			type:"post",
+			data: null,
+			success: function(response){
+				 alldata = response;
+			},
+			error: function(){
+				
+			}
+		});
+})
+
+$(function() {
+	var t = $('#tt');
+	t.textbox('textbox').bind('keyup', function(e){ // 绑定keyup事件
+		var word = $(this).val(); //获取textbox中输入的值
+		$('#dg').datagrid('loadData',{total:0,rows:[]}); //清空datagrid
+		for (var i = 0; i < alldata.rows.length; i++) {//循环遍历从数据库中取回的所有内容
+			var row = alldata.rows[i];
+			if(row.mic.indexOf(word) >= 0) { //如果包含所输入的关键字
+				var index=$('#dg').datagrid('appendRow', {// 动态添加一行数据
+					bh:row.bh,
+					mic: row.mic,
+					shiysc: row.shiysc,
+					shebgly:row.shebgly,
+					gourjg:row.gourjg,
+					goumsj:row.goumsj,
+					}).datagrid('getRows').length-1;
+					$('#dg').datagrid('beginEdit',index)
+			}
+		}
+	});
+})
+
+
+function sous(){
+	var t = $('#tt');
+	var word = $(this).val(); //获取textbox中输入的值
+	for (var i = 0; i < alldata.rows.length; i++) {//循环遍历从数据库中取回的所有内容
+		var row = alldata.rows[i];
+		if(row.mic.indexOf(word) >= 0) { //如果包含所输入的关键字
+			var index=$('#dg').datagrid('appendRow', {// 动态添加一行数据
+				bh:row.bh,
+				xm: row.xm,
+				xb: row.xb,
+				sjh:row.sjh,
+				touxbh:row.touxbh,
+				qx:row.qx,
+				yonghm: row.yonghm,
+				mim: row.mim,
+				xz: row.xz,
+				bm: row.bm,
+				bydk: row.bydk,
+				zc: row.zc,
+				}).datagrid('getRows').length-1;
+				$('#dg').datagrid('beginEdit',index)
+		}
+	}
+}
+
+
+function myformatter(date){
+    var y = date.getFullYear();
+    var m = date.getMonth()+1;
+    var d = date.getDate();
+    var test = y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+    console.info(test);
+    return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+}
+function myparser(s){
+    if (!s) return new Date();
+    var ss = (s.split('-'));
+    var y = parseInt(ss[0],10);
+    var m = parseInt(ss[1],10);
+    var d = parseInt(ss[2],10);
+    if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+        return new Date(y,m-1,d);
+    } else {
+        return new Date();
+    }
+}
+</script>
+
+</body>
+</html>

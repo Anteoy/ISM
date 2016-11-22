@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.zy.web.xinwen.mapper.XinwMapper">
+	
+	<select id="chaxwbxw" resultType="com.zy.web.xinwen.entity.Waibxw">
+		select * from t_waibxw order by scsj limit 10 offset 0  
+	</select>
+	
+	<insert id="shangcwbxf" >
+		insert into t_waibxw (ljdz,zhut) VALUES(#{ljdz},#{zhut})
+	</insert>
+	
+	
+	<update id="update" parameterType="String"  >
+	update  t_yongh  set xm=#{xm},xb=#{xb},sjh=#{sjh},bm=#{bm},zc=#{zc},xz=#{xz} where bh=#{bh}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		delete from t_yongh where bh=#{bh}
+	</delete>
+
+
+	<!-- 内部新闻 -->
+	<select id="chaxnbxw" resultType="com.zy.web.xinwen.entity.Neibxw">
+		select * from t_neibxw order by scsj limit 10 offset 0 
+	</select>
+	
+	<insert id="shangcnbxf">
+		insert into t_neibxw (neir,zhut,scsj) VALUES(#{neir},#{zhut},NOW())
+	</insert>
+	
+	<!-- 查询内部新闻具体信息 -->
+	<select id="chaxjtxx" resultType="com.zy.web.xinwen.entity.Neibxw">
+		select * from t_neibxw where bh = #{bh}
+	</select>
+</mapper>

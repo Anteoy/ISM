@@ -1,0 +1,130 @@
+<!--
+  @filename vae.html
+  @directory /WebContent/test/t_test_test
+  @description 测试表
+  @author 周严 
+  @date 2016-02-29 09:51:16
+  @version v0.1
+-->
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>审核详细信息表</title>
+	<link rel="stylesheet" type="text/css" href="standard/res/easyui/themes/metro-blue/easyui.css">
+	<link rel="stylesheet" type="text/css" href="standard/res/easyui/themes/mobile.css">
+	<link rel="stylesheet" type="text/css" href="standard/res/easyui/themes/icon.css">
+	<script type="text/javascript" src="standard/res/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="standard/res/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="standard/res/easyui/jquery.easyui.mobile.js"></script>
+	<script type="text/javascript" src="standard/res/easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="standard/res/js/jquery.tmpl.min.js"></script>
+	<script type="text/javascript" src="standard/res/js/framework.js"></script>
+</head>
+<style scoped>
+	form label {
+		display: block;
+		margin: 10px 0 5px 0;
+	}
+</style>
+<body>
+	<div class="easyui-navpanel" style="position:relative;padding:20px">
+		<header>
+			<div class="m-toolbar">
+  				<span class="m-title">审核详细信息表</span>
+				<div class="m-left">
+					<a href="javascript:void(0)" 
+						onclick="window.history.go(-1)"
+						class="easyui-linkbutton m-back"
+						iconCls="icon-back">返回</a>
+				</div>
+			</div>
+		</header>
+		<div id="div_error" style="padding: 5px; text-align: center; display: none;">参数异常</div>
+		<form id="ff">
+			<input name="bh" type="hidden" />
+ 			<div>
+ 				<label>姓名 : </label>
+					<span id="xm"  style="width:100%" />{{= xm}}</span>
+			</div>
+			<div>
+ 				<label>职称 : </label>
+					<span id="zc"  style="width:100%" />{{= zc}}</span>
+			</div>
+			<div>
+ 				<label>手机号 : </label>
+					<span id="sjh"  style="width:100%" />{{= sjh}}</span>
+			</div>
+ 			<div>
+ 				<label>部门 : </label>
+					<span id="bm"  style="width:100%" />{{= bm}}</span>
+			</div>
+			<div>
+ 				<label>请假事由 : </label>
+					<span id="qjsy"  style="width:100%" />{{= qjsy}}</span>
+			</div>
+ 			<div>
+ 				<label>请假时间 : </label>
+					<span id="qjsj"  style="width:100%" />{{= qjsj}}</span>
+			</div>
+			<div>
+ 				<label>申请时间 : </label>
+					<span id="sqsj"  style="width:100%" />{{= sqsj}}</span>
+			</div>
+
+			<div id="div_fn_ok" style="text-align:center;margin-top:30px">
+				<a href="javascript:void(0)" class="easyui-linkbutton" onclick="shenhe(1)" style="width:49%;height:40px;float:left;margin-right: 6px;">
+					<span style="font-size:16px">审核通过</span>
+				</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton" onclick="shenhe(0)" style="width:49%;height:40px;float:left">
+					<span style="font-size:16px">审核不通过</span>
+				</a>
+			</div>
+
+		</form>
+		
+	</div>
+
+	<script type="text/javascript">
+		
+		var bh = $$.GetUrlParam("bh"); // 从链接获取参数 bh
+		fn_loadform();
+		/**
+		 * 加载表单数据
+		 * @param bh 主键编号
+		 */
+		function fn_loadform() {
+			$$.loading(); // 显示loading框
+			$.post("qingjtxxxx.do", {"bh":bh}, function(response) {
+				var data = response.data;
+				$('#xm').text(data.xm);
+				$('#zc').text(data.zc);
+				$('#sjh').text(data.sjh);
+				$('#bm').text(data.bm);
+				$('#qjsy').text(data.qjsy);
+				$('#qjsj').text(data.qjsj);
+				$('#sqsj').text(data.sqsj);
+				$$.closeloading(); // 关闭loading框
+			});
+		}
+		
+		function shenhe(sfshcg){// 是否审核成功
+			$$.loading(); // 显示loading框s
+			var param = {
+					"sfshcg":sfshcg,
+					"bh": bh
+			}
+			$.post("shenhejieguo.do",param,function(response){
+				if(response.success == 0){
+					console.info("提交结果失败");
+				}
+				if(response.success == 1){
+				$$.closeloading(); // 关闭loading框
+			 	window.location.href = "forwardtz.do";
+				}
+			});
+		}
+	</script>
+
+</body>

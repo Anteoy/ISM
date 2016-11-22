@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.zy.web.chat.mapper.ChatMapper" >
+
+	<insert id="saveAll">
+		insert into t_chatall values(#{id},#{src},#{content},NOW(),#{sfcg},#{xm},#{touxbh})
+	</insert>
+	
+	<insert id="saveWd">
+		insert into t_wfsxx values(#{id},#{src},#{srctype},#{target},#{targettype},#{content},NOW())
+	</insert>
+	
+	<select id="chaxwd" resultType="com.zy.web.chat.entity.Weifsxx">
+		select * from t_wfsxx where target = #{src} 
+	</select>
+	
+	<update id="gengxwd">
+		update t_wfsxx set receive_time = #{receive_time} sfts=1 where id=#{id}
+	</update>
+	
+	<select id="chaxyits" resultType="com.zy.web.chat.entity.Weifsxx">
+		select * from t_wfsxx where id = #{id} 
+	</select>
+	
+	<delete id="deletewfs" >
+		delete from t_wfsxx where id = #{id}
+	</delete>
+	
+	<insert id="charydxx" >
+		insert into t_yfsxx (id,src,target,content,send_time,receive_time) values (#{id},#{src},#{target},#{content},#{send_time},#{receive_time})
+	</insert>
+	
+	<!-- 查询用户信息 -->
+	<select id="hqyh" resultType="com.zy.web.ism.entity.Employee">
+		select * from t_yongh where bh = #{zhbh}
+	</select>
+	
+	<!-- 更新在线状态 -->
+	<update id="updateState" >
+		update t_yongh set zxzt=#{zxzt} where bh = #{bh}
+	</update>
+	
+	<!-- 获取所有用户 -->
+	<select id="getUserZx" resultType="int">
+		select * from t_yongh 
+	</select>
+	
+	<!-- 以下为群聊group chat -->
+	<!-- 查询出前十条信息 -->
+	<select id="chaxAll" resultType="com.zy.web.chat.entity.MessageAll">
+		select * from t_chatall order by send_time desc limit 10 offset 0
+	</select>
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.zy.web.khxx.mapper.KehxxMapper">
+<!-- 获取客户列表 -->
+<select id="huoqkhll" resultType="com.zy.web.khxx.entity.Kehxx">
+	select * from t_khxx where khssyh = #{khssyh}
+</select>
+
+<!-- 增加客户 -->
+<insert id="zenjkh">
+	insert into t_khxx (xm,xb,nl,ssdw,cjsj,ms,lxfs,yxjb,khssyh) values (#{xm},#{xb},#{nl},#{ssdw},NOW(),#{ms},#{lxfs},#{yxjb},#{khssyh})
+</insert>	
+<!-- 删除客户 -->
+<delete id="shanckh">
+	delete from t_khxx where bh = #{bh}
+</delete>
+
+<!-- 更新客户信息 -->
+<update id="genxkhxx">
+	update t_khxx set xm=#{xm},xb=#{xb},nl=#{nl},ssdw=#{ssdw},ms=#{ms}, lxfs=#{lxfs},yxjb=#{yxjb} where bh = #{bh}
+</update>
+</mapper>

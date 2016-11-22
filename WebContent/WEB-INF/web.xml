@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+  <display-name>ISM</display-name>
+  <!-- 进入项目默认引导指针 -->
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+
+<error-page>
+<error-code>500</error-code>
+<location>/error/error500.jsp</location>
+</error-page>
+
+<!-- 在web-inf下spring会自动扫描一个XML文件名叫chapter2-servlet.xml文件 -->
+  <servlet>
+    <servlet-name>chapter2</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <!-- 拦截所有*.do的请求 -->
+  <servlet-mapping>
+    <servlet-name>chapter2</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 方式一指定以Listener方式启动Spring容器 -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
+  <!-- ApplicationContext容器的实例化工作交给Web服务器完成 -->
+  <!-- 指定Spring的配置文件，多个配置文件以逗号分隔 -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath*:spring-base.xml</param-value>
+  </context-param>
+  
+  <!-- 方式二指定以Servlet方式启动Spring容器 -->
+  <servlet>
+    <servlet-name>ApplicationContextLoaderServlet</servlet-name>
+    <servlet-class>
+        com.zy.common.ApplicationContextLoaderServlet
+    </servlet-class>
+    <load-on-startup>1</load-on-startup><!-- load-on-startup元素标记容器是否在启动的时候就加载这个servlet,数字为有限级非延迟时间 -->
+</servlet>
+
+</web-app>

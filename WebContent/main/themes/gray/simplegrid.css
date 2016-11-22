@@ -1,0 +1,46 @@
+
+.simplegrid {
+	border-collapse: collapse;
+	border: 1px #CCCCCC solid;
+	border-bottom: 1px #CCCCCC solid;
+	border-top-style: none;
+
+	table-layout:fixed;
+	word-break:keep-all;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+
+.simplegrid thead tr {
+	height: 25px;
+}
+
+.simplegrid thead tr th {
+	text-align: center;
+	font-size: 12px;
+	font-weight: normal;
+	border: 1px dotted #CCCCCC;
+	padding-right: 10px; 
+	padding-left: 10px;
+}
+
+.simplegrid tbody tr {
+	height: 25px;
+}
+
+.simplegrid tbody tr td {
+	text-align: center;
+	font-size: 12px;
+	border: 1px dotted #CCCCCC;
+	padding-right: 10px; 
+	padding-left: 10px;
+}
+
+.simplegrid tbody .evenColor {
+	background: #EEEEFF;
+}
+
+.simplegrid tbody .selectColor {
+	background: #FBEC88;
+}

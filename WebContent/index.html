@@ -1,0 +1,328 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<title>欢迎来到ISM服务管理平台</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<script type="text/javascript" src="jquery/jquery.min.js"></script>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			body{
+				font-family:"Trebuchet MS", "Myriad Pro", Arial, sans-serif;
+				font-size:14px;
+				background:#f4f4f4 url(images/bg.gif) repeat top left;
+				color:#333;
+				text-shadow:1px 1px 1px #fff;
+				overflow-y:scroll;
+				/* background-image:url("img/background.jpg"); 
+				background-repeat:no-repeat; 
+				Background-attachment:fixed; 
+				color:none; */
+			}
+			h1{
+				font-size:56px;
+			}
+			a{
+				color:#777;
+			}
+			a:hover{
+				color:#222;
+			}
+			p{
+				padding:5px 0px;
+			}
+			.wrapper{
+				width:960px;
+				margin:20px auto;
+				min-height:550px;
+			}
+			.box{
+				width:49%;
+			}
+			.left{
+				float:left;
+			}
+			.right{
+				float:right;
+			}
+			.clear{
+				clear:both;
+			}
+			a.back{
+				color:#777;
+				position:fixed;
+				top:5px;
+				right:10px;
+				text-decoration:none;
+			}
+			/* Form Style */
+			.form_wrapper{
+				background:#fff;
+				border:1px solid #ddd;
+				margin:0 auto;
+				width:350px;
+				font-size:16px;
+				-moz-box-shadow:1px 1px 7px #ccc;
+				-webkit-box-shadow:1px 1px 7px #ccc;
+				box-shadow:1px 1px 7px #ccc;
+			}
+			.form_wrapper h3{
+				padding:20px 30px 20px 30px;
+				background-color:#444;
+				color:#fff;
+				font-size:25px;
+				border-bottom:1px solid #ddd;
+			}
+			.form_wrapper form{
+				display:none;
+				background:#fff;
+			}
+			.form_wrapper .column{
+				width:47%;
+				float:left;
+			}
+			form.active{
+				display:block;
+			}
+			form.login{
+				width:350px;
+			}
+			form.register{
+				width:550px;
+			}
+			form.forgot_password{
+				width:300px;
+			}
+			.form_wrapper a{
+				text-decoration:none;
+				color:#777;
+				font-size:12px;
+			}
+			.form_wrapper a:hover{
+				color:#000;
+			}
+			.form_wrapper label{
+				display:block;
+				padding:10px 30px 0px 30px;
+				margin:10px 0px 0px 0px;
+			}
+			.form_wrapper input[type="text"],
+			.form_wrapper input[type="password"]{
+				border: solid 1px #E5E5E5;
+				background: #FFFFFF;
+				margin: 5px 30px 0px 30px;
+				padding: 9px;
+				display:block;
+				font-size:16px;
+				width:76%;
+				background: 
+					-webkit-gradient(
+						linear,
+						left top,
+						left 25,
+						from(#FFFFFF),
+						color-stop(4%, #EEEEEE),
+						to(#FFFFFF)
+					);
+				background: 
+					-moz-linear-gradient(
+						top,
+						#FFFFFF,
+						#EEEEEE 1px,
+						#FFFFFF 25px
+						);
+				-moz-box-shadow: 0px 0px 8px #f0f0f0;
+				-webkit-box-shadow: 0px 0px 8px #f0f0f0;
+				box-shadow: 0px 0px 8px #f0f0f0;
+			}
+			.form_wrapper input[type="text"]:focus,
+			.form_wrapper input[type="password"]:focus{
+				background:#feffef;
+			}
+			.form_wrapper .bottom{
+				background-color:#444;
+				border-top:1px solid #ddd;
+				margin-top:20px;
+				clear:both;
+				color:#fff;
+				text-shadow:1px 1px 1px #000;
+			}
+			.form_wrapper .bottom a{
+				display:block;
+				clear:both;
+				padding:10px 30px;
+				text-align:right;
+				color:#ffa800;
+				text-shadow:1px 1px 1px #000;
+			}
+			.form_wrapper a.forgot{
+				float:right;
+				font-style:italic;
+				line-height:24px;
+				color:#ffa800;
+				text-shadow:1px 1px 1px #fff;
+			}
+			.form_wrapper a.forgot:hover{
+				color:#000;
+			}
+			.form_wrapper div.remember{
+				float:left;
+				width:140px;
+				margin:20px 0px 20px 30px;
+				font-size:11px;
+			}
+			.form_wrapper div.remember input{
+				float:left;
+				margin:2px 5px 0px 0px;
+			}
+			.form_wrapper span.error{
+				display: none;
+				color:red;
+				font-size:14px;
+				margin:4px 30px;
+				font-weight: bold;
+			}
+			.form_wrapper input[type="button"] {
+				background: #e3e3e3;
+				border: 1px solid #ccc;
+				color: #333;
+				font-family: "Trebuchet MS", "Myriad Pro", sans-serif;
+				font-size: 14px;
+				font-weight: bold;
+				padding: 8px 0 9px;
+				text-align: center;
+				width: 150px;
+				cursor:pointer;
+				float:right;
+				margin:15px 20px 10px 10px;
+				text-shadow: 0px 1px 0px #fff;
+				-moz-border-radius: 4px;
+				-webkit-border-radius: 4px;
+				border-radius: 4px;
+				-moz-box-shadow: 0px 0px 2px #fff inset;
+				-webkit-box-shadow: 0px 0px 2px #fff inset;
+				box-shadow: 0px 0px 2px #fff inset;
+			}
+			.form_wrapper input[type="button"]:hover {
+				background: #d9d9d9;
+				-moz-box-shadow: 0px 0px 2px #eaeaea inset;
+				-webkit-box-shadow: 0px 0px 2px #eaeaea inset;
+				box-shadow: 0px 0px 2px #eaeaea inset;
+				color: #222;
+			}
+			#loading_div {
+				display: none;
+				text-align: center;
+				background: gray;
+				filter:alpha(opacity=50);
+				height: 240px;
+				width: 350px;
+				-moz-opacity:0.5;
+				opacity: 0.5;
+				position: absolute;
+				top: 0px;
+				margin: auto;
+				padding-top: 200px;
+			}
+		</style>
+	</head>
+	<body >
+	<div style="position:absolute; left:0; top:0; width:100%; height:100%"><img src="img/background.jpg" width=100% height=100%></div>
+		<div style="position:relative;z-index:999;margin-top:10%">
+		<div class="wrapper">
+			<div class="content">
+				<div style="text-align: center;">
+					<h1>欢迎来到ISM服务管理平台</h1>
+				</div>
+				<div id="kong" style="height:50px">
+				</div>
+				<div id="form_wrapper" class="form_wrapper">
+					<form id="login_form" class="login active">
+						<h3>登陆</h3>
+						<div>
+							<label>用户名:</label>
+							<input id="yonghm" type="text" />
+						</div>
+						<div>
+							<label>密码:</label>
+							<input id="mim" type="password" />
+						</div>
+						<div style="padding-top: 20px;">
+							<span id="text_error" class="error">用户名或密码不能为空！</span>
+							<span id="login_error" class="error">用户名或密码错误！</span>
+							<span id="server_error" class="error">请求服务器时发生错误！</span>
+						</div>
+						<div class="bottom">
+							<input type="button" value="登陆" onclick="btn_login()"></input>
+							<div class="clear"></div>
+						</div>
+					</form>
+					<div id="loading_div" style="margin-top: -70px;">
+						<img src="images/loading.gif" alt="" />
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<script type="text/javascript">
+		//$("#loading_div").show();
+			function btn_login() {
+				$("#text_error").hide();
+				$("#login_error").hide();
+				$("#server_error").hide();
+				var yonghm = $("#yonghm").val();
+				var mim = $("#mim").val();
+				if (!yonghm || !mim) {
+					$("#text_error").show();
+					return;
+				}
+
+			//	$("#loading_div").show();
+				$.ajax({
+					url: "login.do",
+					type: "post",
+					data: {
+						yonghm: yonghm,
+						mim: mim
+					},
+					dataType: "json",
+					success: function(data) {
+						if (data.success) {
+							var ZHBH = data.ZHBH;
+							var DLXM = data.xm;
+							var zc = data.zc;
+							var zuihzxsj = data.zuihzxsj;
+							var touxbh = data.touxbh;
+							$.ajax({
+								url: "updateState.do",
+								type: "post",
+								data: {
+									"bh": ZHBH
+								},
+								dataType: "json",
+								success: function(data){
+									if(data.success != 1) return;
+									window.location.href = "main/main.html?ZHBH=" + ZHBH+"&DLXM="+DLXM+"&zc="+zc
+											+"&zuihzxsj="+zuihzxsj+"&touxbh="+touxbh;
+								},
+								error: function() {
+									$("#server_error").show();
+									$("#loading_div").hide();
+								}
+							});
+						} else {
+							$("#login_error").show();
+							$("#loading_div").hide();
+						}
+					},
+					error: function() {
+						$("#server_error").show();
+						$("#loading_div").hide();
+					}
+				});
+			}
+		</script>
+	</body>
+</html>

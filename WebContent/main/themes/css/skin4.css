@@ -1,0 +1,32 @@
+.top{
+	background:#03AD4B ;width:100%
+}
+.top .nav{
+	height: 30px;line-height:30px;border-bottom:1px #D3D3D3 solid;padding-left:10px; 
+}
+.top .nav .logo{
+	font-family:Î¢ÈíÑÅºÚ;font-weight:bold;color:#ffffff;width:200px; display:block;font-size:16px;float:left 
+}
+.top .nav .imenu{
+	 float:left;
+}
+.top .nav .imenu ul{
+ 
+}
+.top .nav .imenu ul li{
+	 float:left ; color:#FFF;width:80px;text-align:center;cursor:pointer
+}
+ 
+.top .nav .imenu ul li .tt{
+	 display:block; width:100%; z-index:100
+}
+.top .nav .imenu ul li .ttab{
+	    position:absolute;  border:2px #039240  solid; border-top-style:none; text-align:left ; line-height:normal; color:#444444;  background:#FFFFFF
+}
+.top .nav .imenu ul li .ttab dl dt{
+	height:22px;  line-height:22px; vertical-align:middle;  padding:5px 10px 5px 10px; width:100px;  text-align:center
+}
+ 
+.selected{
+	background: #039240; cursor:pointer
+}

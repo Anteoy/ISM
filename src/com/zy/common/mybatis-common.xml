@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="common">
+	<!-- 动态sql 若满足条件则sql语句加到后面 -->
+	<sql id="PaginationSql">
+		<if test="__sort__ !=null">
+			order by <foreach collection="__sort__.keys" item="key" separator=",">${key} ${__sort__[key]}</foreach>
+		</if>
+		<if test="__start__ != null and __end__ !=null">
+			limit #{__end__}-#{__start__} offset #{__start__}
+		</if>
+	</sql>
+
+</mapper>

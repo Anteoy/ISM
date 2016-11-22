@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	
+	<link rel="stylesheet" type="text/css" href="js2/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="js2/easyui/themes/icon.css">
+	<script type="text/javascript"	src="js2/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="jquery/jquery.tmpl.min.js"></script>
+	<script type="text/javascript"	src="js2/easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript"	src="js2/easyui/jquery.easyui.min.js"></script>
+	
+	<script type="text/javascript" src="js2/interComUrl.js"></script>
+	<script type="text/javascript" src="js2/jquery.messager.js"></script>
+	<script type="text/javascript" src="js2/indexedDB.js"></script>
+	<script type="text/javascript" src="js2/framework.js"></script>
+	<script type="text/javascript" src="js2/diaoyong.js"></script>
+	<script type="text/javascript" src="js2/chat.js?v=1"></script>
+	<style>
+		.msg_receive {
+			position: relative;
+			margin: 5px;	/* 设置元素的4个外边距 */
+			padding: 5px;	/** 设置 元素的 4 个内边距 */
+			text-align: left;	/* 设置元素的文本对齐方式 */
+			margin-top: 0px; 
+			padding-top: 0px;
+		}
+		
+		.msg_receive .span {
+			border-radius:5px;	/* 向div元素添加圆角边框 */
+			background: #C5D9E6;
+			margin-left: 10px;
+			padding: 10px;
+			text-align: left;
+		}
+		
+		.ysxmsj {
+			float:right;
+		}
+		
+		.msg_receive .arrow {
+			position:absolute;
+			top: 13px;	/**4-13 顶部边缘 	上外边距边界与其包含块上边界之间的偏移*/
+			left: -1px;
+			width:0;
+			height:0;
+			font-size:0;
+			border:solid 8px;	/* 边框实线，默认也为实线 */
+			border-color: #FFFFFF #C5D9E6 #FFFFFF #FFFFFF;
+		}
+		
+		.msg_send {
+			position: relative;
+			margin: 5px;
+			padding: 5px;
+			text-align: right;
+			margin-top: 0px; 
+			padding-top: 0px;
+		}
+		
+		.msg_send .span {
+			border-radius:5px;	/* 向div元素添加圆角边框 */
+			background: #ADE683;
+			margin-right: 10px;
+			padding: 10px;
+			text-align: right;
+		}
+		
+		.msg_send .arrow {
+			position:absolute;
+			top: 13px;
+			right: -1px;
+			width:0;
+			height:0;
+			font-size:0;
+			border:solid 8px;
+			border-color:#FFFFFF #FFFFFF #FFFFFF #ADE683;
+		}
+	</style>
+</head>
+<body class="easyui-layout">
+
+	<div id="zixrxx" region="north" split="true" height="150">
+		<div class="panel-header" style="width: 100%;"><button  onclick="history.go(-1);">返回</button><div class="panel-title"></div></div>
+		<p style="font-size: 12px; padding: 0px;  margin: 5px; line-height: 17px;">
+			<span>
+				姓名： <span id="xm"></span><br/>
+				性别： <span id="xb"></span>&nbsp;&nbsp;&nbsp;&nbsp;年龄： <span id="nl"></span><br/>
+				身份证号： <span id="sfzh"></span><br/>
+				联系电话： <span id="lxdh"></span><br/>
+				最近访问： <span id="zjfwsj"></span><br/>
+			</span>
+		</p>
+	</div>
+	
+	<div id="message" region="center" split="true"> <!-- split有无横的间隔 这里无 -->
+		<!-- <div id="zixt" region="north" split="true" height = "150">
+			<p style="font-size: 12px; padding: 0px;  margin: 5px; line-height: 17px;">
+				<span>
+					这里是咨询头
+				</span>
+			</p>
+		</div> -->
+	</div>
+	<div region="south"  split="true" height="80">
+		<div class="easyui-layout" fit="true" border="0">
+			<div region="center" border="0"><textarea id="sendbox" style="border: 0px; width:100%; height:100%;"></textarea></div>
+			<div region="east" border="0" width="100"><input id="sendbtn" type="button" style="width:100%; height:100%;" value="发送"></div>
+		</div>
+	</div>
+</body>
+</html>

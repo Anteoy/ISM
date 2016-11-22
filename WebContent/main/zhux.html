@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<title>正在注销...</title>
+</head>
+<body>
+<div style="text-align: center;margin-top: 30%;">处理提交成功，<span id="time">5</span>秒后将会跳转到用户登陆界面</div>
+<script>
+	var time = 5;
+	setInterval(function redirect() {
+		if (time-- <= 0) {
+			window.location.href = "../index.html";
+			return;
+		}
+		document.getElementById("time").innerHTML = time;
+	}, 1000);
+	
+	$(function(){
+		$.ajax({
+			url: "../zhux.do",
+			type: "post",
+			success: function(response) {
+				if(response.success == 1){
+					console.info("注销成功");
+					alert("注销成功");
+					quanxtz();
+				}
+			},
+			error: function() {console.info("注销失败");alert("注销失败");}
+		});
+	})
+</script>
+</body>
+</html>

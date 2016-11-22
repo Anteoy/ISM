@@ -1,0 +1,130 @@
+<!--
+  @filename index.html
+  @directory /WebContent/test/t_test_test
+  @description 请假申请
+  @author 周严 
+  @date 2016-02-29 09:51:16
+  @version v0.1
+-->
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>请假申请</title>
+	<link rel="stylesheet" type="text/css" href="../standard/res/easyui/themes/metro-blue/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../standard/res/easyui/themes/mobile.css">
+	<link rel="stylesheet" type="text/css" href="../standard/res/easyui/themes/icon.css">
+	<script type="text/javascript" src="../standard/res/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="../standard/res/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="../standard/res/easyui/jquery.easyui.mobile.js"></script>
+	<script type="text/javascript" src="../standard/res/easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="../standard/res/js/jquery.tmpl.min.js"></script>
+</head>
+<body >
+	<div class="easyui-navpanel">
+		<header>
+			<div class="m-toolbar">
+				<span class="m-title">示例模板</span>
+				<div class="m-right">
+				</div>
+			</div>
+		</header>
+		<form id="ff" style="text-align:center;margin-top:1%">
+			<div style="margin: 0 auto 20px;">
+				<label>姓　　名：</label>
+				<input id="xm" class=""  type="text" style="width:60%;height: 30px;">
+			</div>
+			<div style="margin: 0 auto 20px;">
+				<label>请假时间：</label>
+				<input class="easyui-datebox" id="qjsjks"  data-options="formatter:myformatter,parser:myparser" style="height: 30px;width:30%"></input>　至　
+				<input class="easyui-datebox" id="qjsjjs"  data-options="formatter:myformatter,parser:myparser" style="height: 30px;width:28%"></input>
+			
+			</div>
+			<div style="margin: 0 auto 20px;">
+				<label>所属部门：</label>
+				<input id="bm" class=""  type="text" style="width:60%;height: 30px;">
+			</div>
+			<div >
+				<div style = "text-align:left;padding-left: 239PX;margin: 0 auto 20px;">请假事由：</div>
+				　　　　　　<textarea id="qjsy" rows='6'   type="text" style="width:60%"></textarea>
+			</div>
+			<div style="margin: 20px auto 20px;">
+				<label>职　　称：</label>
+				<input id="zc" class=""  type="text" style="width:60%;height: 30px;">
+			</div>
+			<div style="margin: 0 auto 20px;">
+				<label>手机号　：</label>
+				<input id="sjh"  class=""  type="text" style="width:60%;height: 30px;">
+			</div>
+			<div id="div_yzm" style="margin: 0 auto 20px;">
+				<label>验证码　：</label>
+				<input id="yzm" type="number" class="" style="width:60%;height: 30px;">
+			</div>
+			<div >
+				<span id="info" style=" color: red; margin-top: 5px"></span>
+			</div>
+			 <div id="save" style="text-align:center;margin-top:30px " >
+			<a href="#" class="easyui-linkbutton" onclick="save()" style="width:500px"><span style="font-size:16px;">保存</span></a>
+			</div>
+		</form>
+	</div>
+
+	
+	<script type="text/javascript">
+		function save(){
+			var qjsjks = $('#qjsjks').datebox('getValue');
+			var qjsjjs = $('#qjsjjs').datebox('getValue');
+			var xm = $("#xm").val();
+			var qjsy = $("#qjsy").val();
+			var bm = $("#bm").val();
+			var zc = $("#zc").val();
+			var sjh = $("#sjh").val();
+			var qjsj = qjsjks +"至"+ qjsjjs;
+			var data = {
+					xm : xm,
+					qjsj : qjsj,
+					bm : bm ,
+					zc : zc,
+					sjh : sjh,
+					qjsy : qjsy
+			}
+			$.ajax({
+				data: data,
+				type: "post",
+				url : "qingjiashenqing.do" ,
+				success:function(){
+					
+				},
+				error: function(){
+					
+				}
+			})
+		}
+	</script>
+
+
+	<script type="text/javascript">
+        function myformatter(date){
+            var y = date.getFullYear();
+            var m = date.getMonth()+1;
+            var d = date.getDate();
+            var test = y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+            console.info(test);
+            return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+        }
+        function myparser(s){
+            if (!s) return new Date();
+            var ss = (s.split('-'));
+            var y = parseInt(ss[0],10);
+            var m = parseInt(ss[1],10);
+            var d = parseInt(ss[2],10);
+            if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+                return new Date(y,m-1,d);
+            } else {
+                return new Date();
+            }
+        }
+    </script>
+</body>
+</html>

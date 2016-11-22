@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>内部新闻服务上传</title>
+    <link rel="stylesheet" type="text/css" href="../easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../easyui/demo/demo.css">
+    <script type="text/javascript" src="../jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../jquery/jquery.easyui.min.js"></script>
+</head>
+<body>
+    <h2>内部新闻服务上传</h2>
+    <p>The textbox allows a user to enter information.</p>
+    <div style="margin:20px 0;"></div>
+    <div class="easyui-panel" title="Register" style="width: 100%;height: 100%;padding:30px 60px">
+        <div style="margin-bottom:20px">
+            <div>主题:</div>
+            <textarea rows="3" cols="20" id="zhut"></textarea>
+        </div>
+        <div style="margin-bottom:20px">
+            <div>链接地址:</div>
+            <textarea rows="20" cols="200" id="neir"></textarea>
+        </div>
+        
+        <div>
+            <div onclick="shangcnbxf()" class="easyui-linkbutton" iconCls="icon-ok" style="width:100%;height:32px">Register</div>
+        </div>
+    </div>
+	<script>
+		//上传外部新闻服务
+		function shangcnbxf(){
+			var neir = $("#neir").val();
+			var zhut = $("#zhut").val();
+			var data ={
+					"neir" : neir,
+					"zhut"  :  zhut
+			}
+			$.ajax({
+				url:"../shangcnbxf.do",
+				type:"post",
+				data: data,
+				success: function(response){
+					if(response.success == 1){
+						alert("操作成功");
+					}else{
+						alert("操作失败 ");
+					}
+				},
+				error: function(){
+					
+				}
+			});
+		}
+	
+	
+	
+	</script>
+</body>
+</html>

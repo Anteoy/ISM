@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.zy.web.xitgg.mapper.GonggMapper">
+	
+	<!-- 查询最新一条的系统公告信息 -->
+	<select id="chaxgg" resultType="com.zy.web.xitgg.entity.Gongg">
+		select * from t_gongg order by ggsj limit 1 offset 0
+	</select>
+	
+	<!-- <select id="chaxwbxw" resultType="com.zy.web.xinwen.entity.Waibxw">
+		select * from t_waibxw order by scsj limit 10 offset 0  
+	</select>
+	
+	<insert id="shangcwbxf" >
+		insert into t_waibxw (ljzd,zhut) VALUES(#{ljzd},#{zhut})
+	</insert>
+	
+	
+	<update id="update" parameterType="String"  >
+	update  t_yongh  set xm=#{xm},xb=#{xb},sjh=#{sjh},bm=#{bm},zc=#{zc},xz=#{xz} where bh=#{bh}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		delete from t_yongh where bh=#{bh}
+	</delete> -->
+
+</mapper>

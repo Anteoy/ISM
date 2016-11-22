@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zy.web.qingjia.mapper.QingjiaMapper" >	
+	
+	<sql id="WhereSql">
+		<if test="bh != null">
+			and T_TEST_TEST.bh=#{bh}::numeric
+		</if>
+		<if test="xm != null">
+			and T_TEST_TEST.xm like '%'||#{xm}||'%'
+		</if>
+	</sql>
+	
+	<sql id="chaxsyyhSelectSql">
+		select
+			*
+		from t_qingj T_TEST_TEST where sfcl = -1
+		<trim prefix="and" prefixOverrides="and|or">
+			<include refid="com.zy.web.qingjia.mapper.QingjiaMapper.WhereSql" />
+		</trim>
+	</sql>
+	
+	
+	<!-- 插入请假表 -->
+	<insert id="charqjb">
+		insert into t_qingj (bm,xm,zc,sjh,qjsy,qjsj,sqsj,sfcl) values (#{bm},#{xm},#{zc},#{sjh},#{qjsy},#{qjsj},NOW(),-1)
+	</insert>
+	
+	<!-- 拿出所有未处理请假条 -->
+	<select id="chaxlist" resultType="com.zy.web.qingjia.entity.QingJiaTiao">
+		<!-- select * from t_qingj where sfcl = 0 -->
+		<include refid="chaxsyyhSelectSql" />
+		<include refid="common.PaginationSql" />
+	</select>
+	
+	<!-- 查出总数 进行分页限制 -->
+	<select id="count" resultType="java.lang.Integer">
+		select count(1) from (<include refid="chaxsyyhSelectSql" />) T_TEST_TEST
+	</select>
+	
+	<!-- 获取请假条详细信息 -->
+	<select id="qingjtxxxx" resultType="com.zy.web.qingjia.entity.QingJiaTiao">
+		select * from t_qingj where bh = #{bh}
+	</select>
+	
+	<!-- 审核通过 -->
+	<update id="shenhtg">
+		update t_qingj set sfcl = 1 where bh = #{bh}
+	</update>
+	
+	<!-- 审核未通过 -->
+	<update id="shenhwtg">
+		update t_qingj set sfcl = 0 where bh = #{bh}
+	</update>
+</mapper>
